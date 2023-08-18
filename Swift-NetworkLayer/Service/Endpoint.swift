@@ -6,3 +6,5 @@
 //
 
 import Foundation
+
+// MARK: This liblary was created for generic network layer
