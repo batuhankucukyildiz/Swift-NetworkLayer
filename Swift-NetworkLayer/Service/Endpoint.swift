@@ -13,7 +13,7 @@ protocol HttpProtocol{
     // MARK: Property
     var baseUrl : String {get}
     var path : String {get}
-    var endpoint : HttpMethod {get}
+    var method : HttpMethod {get}
     var header : [String : String]? {get}
     // MARK: Function
     func request() -> URLRequest
@@ -29,3 +29,40 @@ enum Endpoint {
     case getUser
 }
 
+
+extension Endpoint : HttpProtocol{
+    var baseUrl: String {
+        return "localhost:3000"
+    }
+    
+    var path: String {
+        switch self {
+        case .getUser : return "/users"
+        }
+    }
+    
+    var method: HttpMethod {
+        switch self{
+        case .getUser : return .get
+        }
+    }
+    
+    var header: [String : String]? {
+        return nil
+    }
+    
+    func request() -> URLRequest {
+        guard var components = URLComponents(string: baseUrl) else {
+            fatalError("UrlError")
+        }
+        components.path = path
+        var request = URLRequest(url : components.url!)
+        request.httpMethod = method.rawValue
+        if let header = header {
+            for (key , value) in header {
+                request.setValue(value, forHTTPHeaderField: key)
+            }
+        }
+        return request
+    }
+}
