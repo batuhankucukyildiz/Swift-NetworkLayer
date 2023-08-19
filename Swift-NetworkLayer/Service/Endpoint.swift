@@ -64,5 +64,6 @@ extension Endpoint : HttpProtocol{
             }
         }
         return request
+        // requestin hangi değeri döndüğü bakılacak normalde with kısmına url girdiğimiz için bu yapıya uygun dönmesi gerekmekte
     }
 }
