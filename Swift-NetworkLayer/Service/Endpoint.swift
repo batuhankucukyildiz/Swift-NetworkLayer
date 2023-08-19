@@ -50,7 +50,7 @@ extension Endpoint : HttpProtocol{
     var header: [String : String]? {
         return nil
     }
-    
+    // bu kısımda request bize urlSession.dataTask(with: kısmına girdiğimiz url dönüyor bizde bu sayede temiz bir endpoint kullanabiliyoruz.)
     func request() -> URLRequest {
         guard var components = URLComponents(string: baseUrl) else {
             fatalError("UrlError")
